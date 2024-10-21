@@ -125,3 +125,10 @@ bundle exec rspec
 ```
 
 You can see the test coverage in `/coverage/.last_run.json` file.
+
+### Lint
+To check and fix code style with Rubocop:
+
+```sh
+bundle exec rubocop -a
+```
