@@ -20,6 +20,11 @@ This repository consists of two main components:
 
 ### Setup
 - **Clone the repository**
+
+  ```sh
+  git clone https://github.com/theyudiriski/personal-banking
+  ```
+
 - **Install dependencies:**
 
   ```sh
@@ -72,6 +77,8 @@ This repository consists of two main components:
 Same setup as Personal Banking App. Make sure you already register RapidAPI Key in `.env` file:
 
 ```sh
+# check docs file for api key
+
 RAPIDAPI_KEY='xyz'
 ```
 
