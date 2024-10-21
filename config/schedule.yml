@@ -1,0 +1,4 @@
+fetch_stock_prices:
+  cron: 0/45 * * * * ?"
+  class: "FetchStockPriceWorker"
+  queue: default
