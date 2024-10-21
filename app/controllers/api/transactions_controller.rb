@@ -1,24 +1,24 @@
-require 'ostruct'
+require "ostruct"
 
 module Api
   class TransactionsController < ApplicationController
-    before_action :authenticate_user!, only: [:transfer, :index]
+    before_action :authenticate_user!, only: [ :transfer, :index ]
 
     before_action :validate_users, only: :transfer
     before_action :set_users, only: :transfer
 
     def transfer
       # handle idempotent requests
-      idempotent_key = request.headers['Idempotent-Key']
+      idempotent_key = request.headers["Idempotent-Key"]
 
       unless valid_idempotent_key?(idempotent_key)
-        return render json: { error: 'Invalid Idempotent-Key' }, status: :unprocessable_entity
+        return render json: { error: "Invalid Idempotent-Key" }, status: :unprocessable_entity
       end
 
       # create a unique idempotent key for the user
       user_id = session[:user_id]
       key = "idempotent:#{user_id}:#{idempotent_key}"
-    
+
       response = $redis.get(key)
 
       # always return same response for the same idempotent key regardless of the request
@@ -50,7 +50,7 @@ module Api
 
     def validate_users
       if session[:user_id] == params[:credit_user_id]
-        render json: { error: 'Sender and receiver cannot be the same' }, status: :unprocessable_entity
+        render json: { error: "Sender and receiver cannot be the same" }, status: :unprocessable_entity
       end
     end
 

@@ -1,8 +1,8 @@
-require 'sidekiq'
-require 'sidekiq-cron'
+require "sidekiq"
+require "sidekiq-cron"
 
-redis_host = ENV['REDIS_HOST']
-redis_port = ENV['REDIS_PORT']
+redis_host = ENV["REDIS_HOST"]
+redis_port = ENV["REDIS_PORT"]
 redis_url = "redis://#{redis_host}:#{redis_port}/0"
 
 # Set Redis connection

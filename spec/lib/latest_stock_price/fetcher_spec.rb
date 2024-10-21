@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe LatestStockPrice::Fetcher, type: :lib do
-  let(:stock_data) { [{ 'Symbol' => 'ASII', 'Name' => 'Astra', 'LTP' => 4500.0 }] }
+  let(:stock_data) { [ { 'Symbol' => 'ASII', 'Name' => 'Astra', 'LTP' => 4500.0 } ] }
 
   before do
     allow(LatestStockPrice::Client).to receive(:equities).and_return(stock_data)

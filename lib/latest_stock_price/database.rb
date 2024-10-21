@@ -2,12 +2,12 @@ module LatestStockPrice
   class Database
     def self.create_or_update_equities(stock_data)
       # Find existing stock by its symbol or unique identifier
-      stock = StockPrice.find_by(ticker_symbol: stock_data['Symbol'])
+      stock = StockPrice.find_by(ticker_symbol: stock_data["Symbol"])
 
       stock_attributes = {
-        ticker_symbol: stock_data['Symbol'],
-        company_name: stock_data['Name'],
-        latest_price: stock_data['LTP']
+        ticker_symbol: stock_data["Symbol"],
+        company_name: stock_data["Name"],
+        latest_price: stock_data["LTP"]
       }
 
       if stock

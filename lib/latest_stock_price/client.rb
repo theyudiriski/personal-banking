@@ -1,11 +1,11 @@
-require 'httparty'
+require "httparty"
 
 module LatestStockPrice
   class Client
-    BASE_URL = 'https://latest-stock-price.p.rapidapi.com'.freeze
-    API_KEY = ENV['RAPIDAPI_KEY'].freeze
+    BASE_URL = "https://latest-stock-price.p.rapidapi.com".freeze
+    API_KEY = ENV["RAPIDAPI_KEY"].freeze
 
-    HOST = 'latest-stock-price.p.rapidapi.com'.freeze
+    HOST = "latest-stock-price.p.rapidapi.com".freeze
 
     # Method to fetch all equities
     def self.equities

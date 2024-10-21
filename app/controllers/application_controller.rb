@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
   end
 
   def authenticate_user!
-    render json: { error: 'Unauthorized' }, status: :unauthorized unless current_user
+    render json: { error: "Unauthorized" }, status: :unauthorized unless current_user
   end
 
   private
@@ -19,7 +19,7 @@ class ApplicationController < ActionController::API
     default_per_page = 10
 
     if per_page.positive?
-      [per_page, max_per_page].min
+      [ per_page, max_per_page ].min
     else
       default_per_page
     end

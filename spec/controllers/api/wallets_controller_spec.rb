@@ -40,9 +40,9 @@ module Api
       context 'when user is invalid' do
         it 'returns an unauthorized error' do
           session[:user_id] = 'invalid_id'
-          
+
           get :show
-    
+
           expect(response).to have_http_status(:unauthorized)
         end
       end

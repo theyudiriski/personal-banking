@@ -9,10 +9,10 @@ RSpec.describe LatestStockPrice::Client, type: :lib do
       'X-Rapidapi-Key' => ENV['RAPIDAPI_KEY'],
       'Accept' => '*/*',
       'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-      'User-Agent' => 'Ruby',
+      'User-Agent' => 'Ruby'
     }
   end
-  let(:response_body) { [{ 'Symbol' => 'ASII', 'Name' => 'Astra', 'LTP' => 4500.0 }].to_json }
+  let(:response_body) { [ { 'Symbol' => 'ASII', 'Name' => 'Astra', 'LTP' => 4500.0 } ].to_json }
 
   before do
     stub_request(:get, api_url)

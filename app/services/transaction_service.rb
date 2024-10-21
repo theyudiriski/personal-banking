@@ -1,16 +1,16 @@
 class TransactionService
-  DEBIT_TYPE = 'debit'.freeze
-  CREDIT_TYPE = 'credit'.freeze
+  DEBIT_TYPE = "debit".freeze
+  CREDIT_TYPE = "credit".freeze
 
   def self.transfer(debit_user, credit_user, amount)
-    return TransactionResult.new(success: false, error: 'Amount must be greater than zero') unless amount > 0
+    return TransactionResult.new(success: false, error: "Amount must be greater than zero") unless amount > 0
 
     # Wrap inside a transaction to ensure atomicity
     ActiveRecord::Base.transaction do
       from_wallet = debit_user.wallet
       to_wallet = credit_user.wallet
 
-      return TransactionResult.new(success: false, error: 'Insufficient funds') if from_wallet.balance < amount
+      return TransactionResult.new(success: false, error: "Insufficient funds") if from_wallet.balance < amount
 
       # Debit from the sender's wallet
       balance_before_from = from_wallet.balance
@@ -49,7 +49,7 @@ class TransactionService
       TransactionResult.new(success: false, error: e.message)
     rescue => e
       # Catch-all for other errors, provides a generic message
-      TransactionResult.new(success: false, error: 'An error occurred while processing the transaction')
+      TransactionResult.new(success: false, error: "An error occurred while processing the transaction")
     end
   end
 end

@@ -4,7 +4,7 @@ RSpec.describe Api::TransactionsController, type: :controller do
   let(:debit_user) { create(:user) }
   let(:credit_user) { create(:user) }
   let(:idempotent_key) { SecureRandom.uuid }
-  
+
   before do
     debit_user.wallet.update(balance: 1000)
     credit_user.wallet.update(balance: 500)
@@ -17,10 +17,10 @@ RSpec.describe Api::TransactionsController, type: :controller do
     context 'with valid parameters' do
       it 'transfers the correct amount and returns success message' do
         post :transfer, params: { credit_user_id: credit_user.id, amount: 200 }
-        
+
         expect(response).to have_http_status(:ok)
         expect(JSON.parse(response.body)).to include('transaction')
-        
+
         debit_user.reload
         credit_user.reload
         expect(debit_user.wallet.balance).to eq(800)
@@ -91,7 +91,7 @@ RSpec.describe Api::TransactionsController, type: :controller do
 
     it 'returns an error if user unauthorized' do
       session[:user_id] = 'invalid_id'
-      
+
       get :index
 
       expect(response).to have_http_status(:unauthorized)
