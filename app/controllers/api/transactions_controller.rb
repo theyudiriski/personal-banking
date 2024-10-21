@@ -41,7 +41,9 @@ module Api
       user = User.find(session[:user_id])
       transactions = user.transactions.order(created_at: :desc)
 
-      render json: { transactions: transactions }, status: :ok
+      transactions = transactions.page(default_page).per(default_per_page)
+
+      render json: { transactions: transactions, meta: pagination_meta(transactions) }, status: :ok
     rescue ActiveRecord::RecordNotFound => e
       render json: { error: e.message }, status: :not_found
     end
@@ -63,6 +65,16 @@ module Api
 
     def valid_idempotent_key?(key)
       key.is_a?(String) && key.length > 0 && key.length <= 36
+    end
+
+    def pagination_meta(transactions)
+      {
+        current_page: transactions.current_page,
+        next_page: transactions.next_page,
+        prev_page: transactions.prev_page,
+        total_pages: transactions.total_pages,
+        total_count: transactions.total_count
+      }
     end
   end
 end

@@ -80,13 +80,30 @@ RSpec.describe Api::TransactionsController, type: :controller do
   end
 
   describe 'GET #index' do
-    it 'returns a list of transactions for the user' do
-      create(:transaction, user: debit_user, amount: 100)
+    context 'when transactions are found' do
+      before {
+        create(:transaction, user: debit_user, amount: 100)
+        get :index
+      }
 
-      get :index
+      it 'returns a list of transactions for the user' do
+        expect(response).to have_http_status(:ok)
 
-      expect(response).to have_http_status(:ok)
-      expect(JSON.parse(response.body).length).to eq(1)
+        json_response = JSON.parse(response.body)
+        expect(json_response['transactions'].size).to eq(1)
+      end
+
+      it 'includes pagination metadata' do
+        json_response = JSON.parse(response.body)
+
+        expect(json_response['meta']).to include(
+          'current_page' => 1,
+          'next_page' => nil,
+          'prev_page' => nil,
+          'total_pages' => 1,
+          'total_count' => 1
+        )
+      end
     end
 
     it 'returns an error if user unauthorized' do
