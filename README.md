@@ -72,10 +72,7 @@ This repository consists of two main components:
 Same setup as Personal Banking App. Make sure you already register RapidAPI Key in `.env` file:
 
 ```sh
-# copy paste the api key value here for simplicity,
-# in reality, any credentials should never be here.
-
-RAPIDAPI_KEY='c566a2d163msh20decc2ae65d7a5p1edb6fjsnfbdd5af2f3e7'
+RAPIDAPI_KEY='xyz'
 ```
 
 ### Sidekiq Setup
